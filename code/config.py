@@ -58,7 +58,7 @@ def general_settings():
 
     param = {}
     param["author"] = "Kais Siala"  # the name of the person running the script
-    param["comment"] = "Workshop_example"
+    param["comment"] = "Mekong"
 
     paths = {}
     fs = os.path.sep
@@ -110,15 +110,15 @@ def scope_paths_and_parameters(paths, param):
     # Paths to the shapefiles
     PathTemp = root + "02 Shapefiles for regions" + fs + "User-defined" + fs
 
-    paths["spatial_scope"] = PathTemp + "gadm36_GHA_0.shp"
-    paths["subregions"] = PathTemp + "gadm36_GHA_0.shp"
+    paths["spatial_scope"] = PathTemp + "ASEAN_countries_with_EEZ.shp"
+    paths["subregions"] = PathTemp + "Mekong_KHM_LAO_THA.shp"
 
     # Name tags for the scope and the subregions
-    param["region_name"] = "Ghana"  # Name tag of the spatial scope
-    param["subregions_name"] = "Ghana_country"  # Name tag of the subregions
+    param["region_name"] = "ASEAN"  # Name tag of the spatial scope
+    param["subregions_name"] = "Mekong_provinces"  # Name tag of the subregions
 
     # Year
-    param["year"] = 2015
+    param["year"] = 2016
 
     # Technologies
     param["technology"] = ["WindOn", "PV"]  # ["PV", "CSP", "WindOn", "WindOff"]
@@ -141,7 +141,7 @@ def computation_parameters(param):
     :return param: The updated dictionary param.
     :rtype: dict
     """
-    param["nproc"] = 6
+    param["nproc"] = 10
     param["CPU_limit"] = True
     return param
 
@@ -247,7 +247,7 @@ def time_series_parameters(param):
     :rtype: dict
     """
     # Quantiles for time series
-    param["quantiles"] = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
+    param["quantiles"] = [95, 80, 50]
 
     # User defined locations
     param["useloc"] = {"Point1": (0, -80), "Point2": (1, 1)}  # {"point name": (latitude, longitude),...}
@@ -420,9 +420,9 @@ def pv_parameters(param):
     GCR = {"shadefree_period": 6, "day_north": 79, "day_south": 263}
     pv["weight"] = {
         "GCR": GCR,
-        "lu_availability": np.array([0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.02, 0.02, 0.02, 0.02, 0.00, 0.02, 0.02, 0.02, 0.00, 0.02]),
+        "lu_availability": np.array([0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.01, 0.01, 0.01, 0.01, 0.00, 0.001, 0.02, 0.001, 0.00, 0.02]),
         "pa_availability": np.array([1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.25, 1.00, 1.00, 1.00, 1.00]),
-        "power_density": 0.000160,
+        "power_density": 0.000180,
         "f_performance": 0.75,
     }
     del GCR
@@ -542,7 +542,7 @@ def onshore_wind_parameters(param):
         "buffer_pixel_amount": 1,
     }
     windon["weight"] = {
-        "lu_availability": np.array([0.00, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.10, 0.10, 0.10, 0.10, 0.00, 0.10, 0.00, 0.10, 0.00, 0.10]),
+        "lu_availability": np.array([0.00, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.05, 0.05, 0.05, 0.05, 0.00, 0.01, 0.00, 0.01, 0.00, 0.05]),
         "pa_availability": np.array([1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.25, 1.00, 1.00, 1.00, 1.00]),
         "power_density": 0.000008,
         "f_performance": 0.87,
